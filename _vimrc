@@ -42,22 +42,18 @@ if has("gui_running")
   set tm=500
 endif
 
-" height of command bar
-set cmdheight=2
-" always show statusline
-set laststatus=2
-" always show current position
-set ruler
+set cmdheight=2 " height of command bar
+set laststatus=2 " always show statusline
+set ruler " always show current position
 
-" search highlight
-set hlsearch
+set hlsearch " highlight
+" smartcase on demand: /SmartCase\c  | matches smartcase, SmartCase, etc.
 
 " show mathcing braces, blinking in tenths of second
 set showmatch
 set mat=2
 
-" vertical move - lines before cursor
-set scrolloff=4
+set scrolloff=4 " vertical move - lines before cursor
 
 " backspace works like it should
 set backspace=2
@@ -75,12 +71,9 @@ set textwidth=0 wrapmargin=0 "prevent newelines in newly entered text
 set nolist " list disables linebreak(!)
 set listchars=eol:█,tab:►►,trail:⊙,extends:▷,precedes:◁,nbsp:▬
 
-
 """"
 " => Filetype, Tabs and Indents, Format options
 """"
-filet
-" enable filetype plugins
 filetype plugin indent on
 
 set expandtab
@@ -94,19 +87,12 @@ set cindent
 set cinoptions+=L0 " turn off dedent on colon (:)
 set cinoptions+=(0 " indent function arguments to parenthesis
 
-" 1 tab == 4 spaces (in general)
-set ts=4 sw=4 sts=4 " tabstop, shiftwidth, softtabstop
+" 1 tab == 2 spaces (in general)
+set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
 
-" 1 tab == 2 spaces
-autocmd Filetype ruby setlocal ts=2 sw=2 sts=2
-autocmd Filetype eruby setlocal ts=2 sw=2 sts=2
-
-autocmd Filetype html setlocal ts=2 sw=2 sts=2
-autocmd Filetype css setlocal ts=2 sw=2 sts=2
-autocmd Filetype scss setlocal ts=2 sw=2 sts=2
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
-
-autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
+" 1 tab == 4 spaces
+autocmd Filetype c      setlocal ts=4 sw=4 sts=4
+autocmd Filetype python setlocal ts=4 sw=4 sts=4
 
 " only tabs for Makefile
 autocmd Filetype make setlocal noexpandtab
@@ -115,7 +101,6 @@ autocmd Filetype make setlocal noexpandtab
 autocmd Filetype,BufNewFile,BufRead,BufWinEnter * setlocal fo-=cro 
 
 set nopaste
-
 
 """"
 " => Keybidnigs
@@ -142,15 +127,11 @@ map <c-h> <c-w>h
 nnoremap k gk
 nnoremap j gj
 
-
 """"
 " => Plugins
 """"
 " settings for pathogen
 execute pathogen#infect()
-syntax on
-filetype plugin indent on
 
 " settings for syntastic
 let g:syntastic_javascript_checkers = ['jshint']
-
