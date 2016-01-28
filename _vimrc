@@ -16,7 +16,7 @@ set hlsearch "highlight search
 " smartcase on demand: /SmartCase\c  | matches smartcase, SmartCase, etc.
 
 " reloads .vimrc automaticaly
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost _vimrc source %
 
 " turn off backups and swaps
 set nobackup
