@@ -6,37 +6,33 @@ set encoding=utf-8
 
 set mouse=a
 
-
 " history and undo levels
 set history=700
 set undolevels=700
 
-" search options
 set hlsearch "highlight search
-" smartcase on demand: /SmartCase\c  | matches smartcase, SmartCase, etc.
 
-" reloads .vimrc automaticaly
-autocmd! bufwritepost _vimrc source %
+autocmd! bufwritepost .vimrc source % " reloads .vimrc automaticaly
 
 " turn off backups and swaps
 set nobackup
 set noswapfile
 
+set nopaste
+
 """"
-" => Colors and Fonts
+" => User Interface Settings
 """"
 syntax enable
 colorscheme solarized  "| native better for html
 set background=dark
-" NOTE: switch colorschemes with Keybindings
 
-" Proper font size for all systems
 set t_Co=256
 if has("gui_running")
   if has("gui_gtk2")
       set guifont=FantasqueSansMono\ 13 " best font ever, sorry Inconsolata
   elseif has("gui_macvim")
-      set guifont=Fantasque\ Sans\ Mono\ Regular:h13 "Menlo\ Regular:h15
+      set guifont=Menlo\ Regular:h15
   elseif has("gui_win32")
       set guifont=Consolas:h8:cANSI
   endif
@@ -45,9 +41,10 @@ if has("gui_running")
   autocmd GUIEnter * set vb t_vb=
 endif
 
-""""
-" => Lines, Wrap, Whitespace
-""""
+" turn off toolbar and menu
+set guioptions-=T
+set guioptions-=m
+
 set number "show line numbers
 set tw=79 "textwidth
 set cc=80 "colorcolumn
@@ -60,6 +57,16 @@ set textwidth=0 wrapmargin=0 "prevent newelines in newly entered text
 set nolist " list disables linebreak(!)
 set listchars=eol:█,tab:►►,trail:⊙,extends:▷,precedes:◁,nbsp:▬
 
+set laststatus=2 " always show statusline
+set ruler " always show current position
+set showmode " always show mode
+
+set scrolloff=4 " vertical move - lines before cursor
+
+set backspace=2 " backspace works like it should
+set whichwrap+=<,>,h,l "backspace, cursor keys wrap to next/prev line
+
+set noerrorbells " turn off annoying error sound
 
 """"
 " => Filetype, Tabs and Indents, Format options
@@ -73,46 +80,22 @@ set autoindent
 set smartindent
 set cindent
 
-" turn off dedent on colon (:)
-set cinoptions+=L0
+set cinoptions+=L0 " turn off dedent on colon (:)
 
 " 1 tab == 2 spaces (in general)
 set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
-
 
 " 1 tab == 4 spaces
 autocmd Filetype c          setlocal ts=4 sw=4 sts=4
 autocmd Filetype python     setlocal ts=4 sw=4 sts=4
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
+autocmd Filetype java       setlocal ts=4 sw=4 sts=4
 
 " only tabs for Makefile
 autocmd Filetype make setlocal noexpandtab
 
 " formatoptions, permanent use, no auto-comments
 autocmd Filetype,BufNewFile,BufRead,BufWinEnter * setlocal fo-=cro 
-
-set nopaste
-
-""""
-" => User Interface Settings
-""""
-
-" always show statusline
-set laststatus=2
-" always show current position
-set ruler
-" always show mode
-set showmode
-
-" vertical move - lines before cursor
-set scrolloff=4
-
-" backspace works like it should
-set backspace=2
-set whichwrap+=<,>,h,l "backspace, cursor keys wrap to next/prev line
-
-" turn off annoying error sound
-set noerrorbells
 
 """"
 " => Keybidnigs
@@ -134,11 +117,8 @@ nnoremap <Leader>s :vsplit<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>q :q<CR>
 
-" write all
-nnoremap <Leader>w :wa<CR>
-
-" current file name
-nnoremap <Leader>f :echo @%<CR>
+nnoremap <Leader>w :wa<CR> " write all
+nnoremap <Leader>f :echo @%<CR> " current file name
 
 " switch colorschemes
 nnoremap <Leader>1 :set background=dark<CR><esc> :colorscheme solarized<CR>
@@ -161,8 +141,17 @@ set pastetoggle=<F5>
 " => Plugins
 """"
 " settings for pathogen
-"execute pathogen#infect()
-"syntax on
-""""
-" =>
-""""
+execute pathogen#infect()
+syntax on
+
+" settings for syntastic
+"let g:syntastic_javascript_checkers = ['jshint', 'flow']
+""let g:syntastic_scss_checkers = ['scss_lint']
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
