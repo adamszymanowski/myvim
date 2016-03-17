@@ -12,7 +12,7 @@ set undolevels=700
 
 set hlsearch "highlight search
 
-autocmd! bufwritepost .vimrc source % " reloads .vimrc automaticaly
+autocmd! bufwritepost .vimrc,_vimrc source % " reloads .vimrc automaticaly
 
 " turn off backups and swaps
 set nobackup
@@ -34,7 +34,7 @@ if has("gui_running")
   elseif has("gui_macvim")
       set guifont=Menlo\ Regular:h15
   elseif has("gui_win32")
-      set guifont=Consolas:h8:cANSI
+    set guifont=Fantasque\ Sans\ Mono:h8 "Consolas:h8:cANSI
   endif
 
   " turn off annoying error blink/sound in GUI 
@@ -81,6 +81,7 @@ set smartindent
 set cindent
 
 set cinoptions+=L0 " turn off dedent on colon (:)
+set cinoptions+=(0 " align to parenthesis
 
 " 1 tab == 2 spaces (in general)
 set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
@@ -110,7 +111,9 @@ nnoremap <Leader>m  :tabnext<CR>
 " cut copy paste | vmap is for visual
 vmap <Leader>x "+x 
 vmap <Leader>c "+y
-map <Leader>v <esc> "+gP
+map <Leader>v "+gP
+" msdn cpp crap
+map <Leader>k "+gPxhJv%:s/_In_//g<CR>f)%JxBi<CR><esc>f(=%
 
 " splits
 nnoremap <Leader>s :vsplit<CR>
@@ -141,8 +144,8 @@ set pastetoggle=<F5>
 " => Plugins
 """"
 " settings for pathogen
-execute pathogen#infect()
-syntax on
+"execute pathogen#infect()
+"syntax on
 
 " settings for syntastic
 "let g:syntastic_javascript_checkers = ['jshint', 'flow']
