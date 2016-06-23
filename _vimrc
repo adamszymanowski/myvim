@@ -80,8 +80,7 @@ set autoindent
 set smartindent
 set cindent
 
-set cinoptions+=L0 " proper indent on case
-set cinoptions+=l1 " proper block indent on case
+set cinoptions=l1 " case label align
 set cinoptions+=(0 " align to parenthesis
 
 " 1 tab == 2 spaces (in general)
@@ -89,7 +88,6 @@ set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
 
 " 1 tab == 4 spaces
 autocmd Filetype c          setlocal ts=4 sw=4 sts=4
-autocmd Filetype cpp        setlocal ts=4 sw=4 sts=4
 autocmd Filetype python     setlocal ts=4 sw=4 sts=4
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
 autocmd Filetype java       setlocal ts=4 sw=4 sts=4
@@ -115,10 +113,7 @@ vmap <Leader>x "+x
 vmap <Leader>c "+y
 map <Leader>v "+gP
 " msdn cpp crap
-map <Leader>k "+gPxBBJv%:s/_\w\+_//g<CR>f)%JxBi<CR><esc>=i{jf(v%<
-map <Leader>l "+gPxBBJv%:s/_\w\+_//g<CR>f)%JxB=i{
-
-map <Leader>b :!build<cr>
+map <Leader>k "+gPxhJv%:s/_In_//g<CR>f)%JxBi<CR><esc>f(=%
 
 " splits
 nnoremap <Leader>s :vsplit<CR>

@@ -80,7 +80,7 @@ set autoindent
 set smartindent
 set cindent
 
-set cinoptions+=L0 " turn off dedent on colon (:)
+set cinoptions=l1 " case label align
 set cinoptions+=(0 " align to parenthesis
 
 " 1 tab == 2 spaces (in general)
