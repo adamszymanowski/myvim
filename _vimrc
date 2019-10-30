@@ -34,7 +34,7 @@ if has("gui_running")
   elseif has("gui_macvim")
       set guifont=Menlo\ Regular:h15
   elseif has("gui_win32")
-    set guifont=Fantasque\ Sans\ Mono:h8 "Consolas:h8:cANSI
+    set guifont=Fantasque\ Sans\ Mono:h13 "Consolas:h8:cANSI
   endif
 
   " turn off annoying error blink/sound in GUI 
@@ -83,14 +83,11 @@ set cindent
 set cinoptions=l1 " case label align
 set cinoptions+=(0 " align to parenthesis
 
-" 1 tab == 2 spaces (in general)
-set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
+" 1 tab == 4 spaces (in general)
+set ts=4 sw=4 sts=4 " tabstop, shiftwidth, softtabstop
 
-" 1 tab == 4 spaces
-autocmd Filetype c          setlocal ts=4 sw=4 sts=4
-autocmd Filetype python     setlocal ts=4 sw=4 sts=4
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
-autocmd Filetype java       setlocal ts=4 sw=4 sts=4
+" 1 tab == 2 spaces
+" autocmd Filetype html         setlocal ts=2 sw=2 sts=2
 
 " only tabs for Makefile
 autocmd Filetype make setlocal noexpandtab
