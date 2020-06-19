@@ -12,7 +12,7 @@ set undolevels=700
 
 set hlsearch "highlight search
 
-autocmd! bufwritepost .vimrc,_vimrc source % " reloads .vimrc automaticaly
+"autocmd! bufwritepost .vimrc source % " reloads .vimrc automaticaly
 
 " turn off backups and swaps
 set nobackup
@@ -26,24 +26,6 @@ set nopaste
 syntax enable
 colorscheme solarized  "| native better for html
 set background=dark
-
-set t_Co=256
-if has("gui_running")
-  if has("gui_gtk2")
-      set guifont=FantasqueSansMono\ 13 " best font ever, sorry Inconsolata
-  elseif has("gui_macvim")
-      set guifont=Menlo\ Regular:h15
-  elseif has("gui_win32")
-    set guifont=Fantasque\ Sans\ Mono:h8 "Consolas:h8:cANSI
-  endif
-
-  " turn off annoying error blink/sound in GUI 
-  autocmd GUIEnter * set vb t_vb=
-endif
-
-" turn off toolbar and menu
-set guioptions-=T
-set guioptions-=m
 
 set number "show line numbers
 set tw=79 "textwidth
@@ -103,18 +85,6 @@ autocmd Filetype,BufNewFile,BufRead,BufWinEnter * setlocal fo-=cro
 """"
 let mapleader = "," " <Leader>
 
-" new tab, tab movement
-nnoremap <Leader>t  :tabnew<CR>
-nnoremap <Leader>n  :tabprevious<CR>
-nnoremap <Leader>m  :tabnext<CR>
-
-" cut copy paste | vmap is for visual
-vmap <Leader>x "+x 
-vmap <Leader>c "+y
-map <Leader>v "+gP
-" msdn cpp crap
-map <Leader>k "+gPxhJv%:s/_In_//g<CR>f)%JxBi<CR><esc>f(=%
-
 " splits
 nnoremap <Leader>s :vsplit<CR>
 nnoremap <Leader>h :split<CR>
@@ -137,24 +107,3 @@ map <c-h> <c-w>h
 " move through wraped lines
 nnoremap k gk
 nnoremap j gj
-
-set pastetoggle=<F5>
-
-""""
-" => Plugins
-""""
-" settings for pathogen
-"execute pathogen#infect()
-"syntax on
-
-" settings for syntastic
-"let g:syntastic_javascript_checkers = ['jshint', 'flow']
-""let g:syntastic_scss_checkers = ['scss_lint']
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
