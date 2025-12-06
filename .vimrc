@@ -3,6 +3,7 @@
 """"
 set nocompatible
 set encoding=utf-8
+set modelines=0 " for security
 
 set mouse=a
 
@@ -12,7 +13,7 @@ set undolevels=700
 
 set hlsearch "highlight search
 
-"autocmd! bufwritepost .vimrc source % " reloads .vimrc automaticaly
+autocmd! bufwritepost .vimrc,_vimrc source % " reloads .vimrc automaticaly
 
 " turn off backups and swaps
 set nobackup
@@ -24,8 +25,37 @@ set nopaste
 " => User Interface Settings
 """"
 syntax enable
-colorscheme solarized  "| native better for html
-set background=dark
+
+set t_Co=256
+
+if has("gui_running")
+" GUI only
+  colorscheme solarized  "| native better for html
+  set background=dark
+
+  if has("gui_gtk2")
+      set guifont=Cascadia\ Code\ 14 "FantasqueSansMono\ 14
+   elseif has("gui_macvim")
+      set guifont=Menlo\ Regular:h15
+  elseif has("gui_win32")
+    set guifont=Cascadia\ Code:h14 "Fantasque\ Sans\ Mono:h14
+  endif
+
+  " turn off annoying error blink/sound in GUI 
+  autocmd GUIEnter * set vb t_vb=
+else
+" Terminal Only
+  colorscheme default
+  highlight clear LineNr
+  highlight clear Comment
+  " DO NOT override the terminal's background.
+  highlight Normal   ctermbg=NONE
+  highlight EndOfBuffer ctermbg=NONE
+endif
+
+" turn off toolbar and menu
+set guioptions-=T
+set guioptions-=m
 
 set number "show line numbers
 set tw=79 "textwidth
@@ -37,6 +67,7 @@ set textwidth=0 wrapmargin=0 "prevent newelines in newly entered text
 
 " (do not) show whitespace, a list of characters
 set nolist " list disables linebreak(!)
+" use `:set list` to show whitespace listed below and `:set nolist` to not show
 set listchars=eol:█,tab:►►,trail:⊙,extends:▷,precedes:◁,nbsp:▬
 
 set laststatus=2 " always show statusline
@@ -65,14 +96,11 @@ set cindent
 set cinoptions=l1 " case label align
 set cinoptions+=(0 " align to parenthesis
 
-" 1 tab == 2 spaces (in general)
-set ts=2 sw=2 sts=2 " tabstop, shiftwidth, softtabstop
+" 1 tab == 4 spaces (in general)
+set ts=4 sw=4 sts=4 " tabstop, shiftwidth, softtabstop
 
-" 1 tab == 4 spaces
-autocmd Filetype c          setlocal ts=4 sw=4 sts=4
-autocmd Filetype python     setlocal ts=4 sw=4 sts=4
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=4
-autocmd Filetype java       setlocal ts=4 sw=4 sts=4
+" 1 tab == 2 spaces
+" autocmd Filetype html         setlocal ts=2 sw=2 sts=2
 
 " only tabs for Makefile
 autocmd Filetype make setlocal noexpandtab
@@ -84,6 +112,18 @@ autocmd Filetype,BufNewFile,BufRead,BufWinEnter * setlocal fo-=cro
 " => Keybidnigs
 """"
 let mapleader = "," " <Leader>
+
+" new tab, tab movement
+nnoremap <Leader>t  :tabnew<CR>
+nnoremap <Leader>n  :tabprevious<CR>
+nnoremap <Leader>m  :tabnext<CR>
+
+" cut copy paste | vmap is for visual
+vmap <Leader>x "+x 
+vmap <Leader>c "+y
+map <Leader>v "+gP
+" msdn cpp crap
+map <Leader>k "+gPxhJv%:s/_In_//g<CR>f)%JxBi<CR><esc>f(=%
 
 " splits
 nnoremap <Leader>s :vsplit<CR>
@@ -107,3 +147,10 @@ map <c-h> <c-w>h
 " move through wraped lines
 nnoremap k gk
 nnoremap j gj
+
+set pastetoggle=<F5>
+
+""""
+" => Plugins
+""""
+" got rid of them

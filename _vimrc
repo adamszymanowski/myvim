@@ -3,6 +3,7 @@
 """"
 set nocompatible
 set encoding=utf-8
+set modelines=0 " for security
 
 set mouse=a
 
@@ -24,21 +25,32 @@ set nopaste
 " => User Interface Settings
 """"
 syntax enable
-colorscheme solarized  "| native better for html
-set background=dark
 
 set t_Co=256
+
 if has("gui_running")
+" GUI only
+  colorscheme solarized  "| native better for html
+  set background=dark
+
   if has("gui_gtk2")
-      set guifont=FantasqueSansMono\ 13 " best font ever, sorry Inconsolata
-  elseif has("gui_macvim")
+      set guifont=Cascadia\ Code\ 14 "FantasqueSansMono\ 14
+   elseif has("gui_macvim")
       set guifont=Menlo\ Regular:h15
   elseif has("gui_win32")
-    set guifont=Fantasque\ Sans\ Mono:h13 "Consolas:h8:cANSI
+    set guifont=Cascadia\ Code:h14 "Fantasque\ Sans\ Mono:h14
   endif
 
   " turn off annoying error blink/sound in GUI 
   autocmd GUIEnter * set vb t_vb=
+else
+" Terminal Only
+  colorscheme default
+  highlight clear LineNr
+  highlight clear Comment
+  " DO NOT override the terminal's background.
+  highlight Normal   ctermbg=NONE
+  highlight EndOfBuffer ctermbg=NONE
 endif
 
 " turn off toolbar and menu
@@ -55,6 +67,7 @@ set textwidth=0 wrapmargin=0 "prevent newelines in newly entered text
 
 " (do not) show whitespace, a list of characters
 set nolist " list disables linebreak(!)
+" use `:set list` to show whitespace listed below and `:set nolist` to not show
 set listchars=eol:█,tab:►►,trail:⊙,extends:▷,precedes:◁,nbsp:▬
 
 set laststatus=2 " always show statusline
@@ -140,18 +153,4 @@ set pastetoggle=<F5>
 """"
 " => Plugins
 """"
-" settings for pathogen
-"execute pathogen#infect()
-"syntax on
-
-" settings for syntastic
-"let g:syntastic_javascript_checkers = ['jshint', 'flow']
-""let g:syntastic_scss_checkers = ['scss_lint']
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+" got rid of them
